@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liang.apblog.dao.BlogArticleRecordDao">
+    <resultMap id="ArticleRecordMap" type="com.liang.apblog.model.pojo.BlogArticleRecord">
+        <id property="id" column="id"/>
+        <result property="frUserId" column="fr_user_id"/>
+        <result property="articleTitle" column="article_title"/>
+        <result property="articleSummary" column="article_summary"/>
+        <result property="frArticleId" column="fr_article_id"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="visitCount" column="visit_count"/>
+        <result property="frCategoryId" column="fr_category_id"/>
+        <result property="likesCount" column="likes_count"/>
+        <result property="opposeCount" column="oppose_count"/>
+        <result property="priority" column="priority"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="ArticleRecordAllCol">
+        `id`, `fr_user_id`, `article_title`,
+        `article_summary`, `fr_article_id`, `comment_count`,
+        `visit_count`, `fr_category_id`, `likes_count`,
+        `oppose_count`, `priority`, `is_deleted`,
+        `create_time`, `update_time`
+    </sql>
+
+    <insert id="insert" parameterType="com.liang.apblog.model.pojo.BlogArticleRecord">
+        insert into `blog_article_record`
+        (id, fr_user_id, article_title, article_summary, fr_article_id, fr_category_id)
+        values (#{id}, #{frUserId}, #{articleTitle}, #{articleSummary}, #{frArticleId}, #{frCategoryId})
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="ArticleRecordMap">
+        select
+        <include refid="ArticleRecordAllCol"/>
+        from `blog_article_record`
+        where `id` = #{id}
+    </select>
+
+    <select id="selectByUserId" resultMap="ArticleRecordMap">
+        select
+        <include refid="ArticleRecordAllCol"/>
+        from `blog_article_record`
+        <where>
+            `fr_user_id` = #{userId}
+            <if test="status != null">
+                and `is_deleted` = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCategoryId" parameterType="java.lang.Long" resultMap="ArticleRecordMap">
+        select
+        <include refid="ArticleRecordAllCol"/>
+        from `blog_article_record`
+        where `fr_category_id` = #{categoryId}
+    </select>
+
+    <update id="update" parameterType="com.liang.apblog.model.pojo.BlogArticleRecord">
+        update `blog_article_record`
+        <set>
+            <if test="isDeleted != null">
+                `is_deleted` = #{isDeleted},
+            </if>
+            <if test="articleTitle != null">
+                `article_title` = #{articleTitle},
+            </if>
+            <if test="articleSummary != null">
+                `article_summary` = #{articleSummary},
+            </if>
+            <if test="frCategoryId != null">
+                `fr_category_id` = #{frCategoryId},
+            </if>
+            <if test="priority != null">
+                `priority` = #{priority}
+            </if>
+        </set>
+        where `id` = #{id}
+    </update>
+
+    <update id="addCommentCount" parameterType="java.lang.Long">
+        update `blog_article_record`
+        set `comment_count` = `comment_count` + 1
+        where `id` = #{id}
+    </update>
+
+    <update id="addVisitCount" parameterType="java.lang.Long">
+        update `blog_article_record`
+        set `visit_count` = `visit_count` + 1
+        where `id` = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liang.apblog.dao.BlogUserDao">
+    <resultMap id="UserMap" type="com.liang.apblog.model.pojo.BlogUser">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="avatarImgUrl" column="avatar_img_url"/>
+    </resultMap>
+    <sql id="userAllCol">
+        `id`, `email`, `password`, `create_time`,
+        `update_time`, `is_deleted`, `nick_name`, `avatar_img_url`
+    </sql>
+
+    <!--插入一条用户记录-->
+    <insert id="insert" parameterType="BlogUser">
+        insert into `blog_user` (`id`, `email`, `password`)
+        values (#{id}, #{email}, #{password})
+    </insert>
+
+    <!--根据id查看-->
+    <select id="selectById" resultMap="UserMap" parameterType="java.lang.Long">
+        select
+        <include refid="userAllCol"/>
+        from `blog_user`
+        where `id` = #{id}
+    </select>
+
+    <!--根据email查看-->
+    <select id="selectByEmail" resultMap="UserMap" parameterType="java.lang.String">
+        select
+        <include refid="userAllCol"/>
+        from `blog_user`
+        where `email` = #{email}
+    </select>
+
+    <!--根据email修改密码-->
+    <update id="updatePassword">
+        update `blog_user`
+        set `password` = #{password}
+        where `email` = #{email}
+    </update>
+
+    <!--    根据email修改记录状态-->
+    <update id="updateStatus">
+        update `blog_user`
+        set `is_deleted` = #{isDeleted}
+        where `email` = #{email}
+    </update>
+
+    <!--    根据email修改昵称-->
+    <update id="updateNickName">
+        update `blog_user`
+        set `nick_name` = #{nickName}
+        where `email` = #{email}
+    </update>
+
+    <!--    根据email修改头像-->
+    <update id="updateAvatar">
+        update `blog_user`
+        set `avatar_img_url` = #{avatarImgUrl}
+        where `email` = #{email}
+    </update>
+</mapper>
