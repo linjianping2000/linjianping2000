@@ -31,13 +31,15 @@ public interface BlogArticleRecordDao {
     BlogArticleRecord selectById(Long id);
 
     /**
-     * 根据外键，用户id查询
+     * 根据外键，用户id查询(分页)
      *
      * @param userId 外键，用户id
      * @param status 状态位，如果为null则查询所有状态
+     * @param st     从第几条(0)开始
+     * @param c      取几条
      * @return
      */
-    List<BlogArticleRecord> selectByUserId(Long userId, Integer status);
+    List<BlogArticleRecord> selectByUserId(Long userId, Integer status, long st, long c);
 
     /**
      * 根据外键，分类id查询

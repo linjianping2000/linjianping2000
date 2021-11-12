@@ -50,7 +50,7 @@ public class BlogArticleRecordDaoTest {
 
     @Test
     public void selectByUserIdTest() {
-        articleRecordDao.selectByUserId(1L, 1).forEach(System.out::println);
+        articleRecordDao.selectByUserId(1L, null, 0, 2).forEach(System.out::println);
     }
 
     @Test

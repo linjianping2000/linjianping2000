@@ -19,6 +19,10 @@ public class RespUtil {
         return fail("请求失败", null);
     }
 
+    public static MyResp fail(String message) {
+        return fail(message, null);
+    }
+
     public static MyResp error() {
         return error("服务器出问题啦");
     }

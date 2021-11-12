@@ -51,6 +51,7 @@
                 and `is_deleted` = #{status}
             </if>
         </where>
+        limit #{st}, #{c}
     </select>
 
     <select id="selectByCategoryId" parameterType="java.lang.Long" resultMap="ArticleRecordMap">
