@@ -1,6 +1,7 @@
 <!--文章分类的表单-->
 <template>
 <div class="head-from">
+  
   <el-form ref="form" :model="form" label-width="80px">
     <!-- 分类框 -->
     <el-form-item label="分类名">
