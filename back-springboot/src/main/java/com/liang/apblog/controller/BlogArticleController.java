@@ -7,6 +7,7 @@ import com.liang.apblog.service.BlogArticleService;
 import com.liang.apblog.util.MyResp;
 import com.liang.apblog.util.RespUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,13 @@ public class BlogArticleController {
     @Autowired
     private BlogArticleService articleService;
 
+    /**
+     * @param userId
+     * @param status
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/article")
     public MyResp listArticleByUserId(@RequestParam long userId,
                                       @RequestParam(required = false) Integer status,

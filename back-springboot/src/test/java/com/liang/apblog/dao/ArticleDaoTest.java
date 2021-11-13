@@ -32,8 +32,8 @@ public class ArticleDaoTest {
         // System.out.println(articleDao.find("2"));
         //
         // System.out.println(articleDao.find(""));
-        // System.out.println(articleDao.find(null));
-        System.out.println(articleDao.find("6183c36cd9f0aa5be2ac7080"));
+        System.out.println(articleDao.find(null));
+        // System.out.println(articleDao.find("6183c36cd9f0aa5be2ac7080"));
     }
 
     @Test

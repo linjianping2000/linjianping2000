@@ -18,10 +18,11 @@ public class TestController {
     private BlogUserDao userDao;
 
     @GetMapping("/test")
-    public String hello() {
-        BlogUser user = new BlogUser();
-        user.setId(11111L).setEmail("hello@test.com").setPassword("123456");
-        System.out.println(userDao.insert(user));
-        return "hello";
+    public BlogUser hello() {
+        // BlogUser user = new BlogUser();
+        // user.setId(11111L).setEmail("hello@test.com").setPassword("123456");
+        // System.out.println(userDao.insert(user));
+        return new BlogUser();
+        // return "hello";
     }
 }

@@ -7,6 +7,7 @@ const routes = [
     {
         path: '/',
         component: () => import('@/views/BasicPage'),
+        meta: {requireLogin: true},
         children: [{
             // 主页
             path: 'main',
@@ -30,7 +31,9 @@ const routes = [
     // {path: '/test4', component: () => import('@/components/Header')},
     // {path: '/test5', component: () => import('@/components/CommonContentCard'), meta: {pageName: '测试'}},
     {path: '/test6', component: () => import('@/components/ArticleTable')},
+    {path: '/ca', component: () => import('@/components/CategoryForm')},
     {path: '/login', component: () => import('@/views/LoginPage'), meta: {requireLogin: false}},
+
     // {path: '/register', component: () => import('@/views/LoginPage'), meta: {requireLogin: false}}
 ]
 
