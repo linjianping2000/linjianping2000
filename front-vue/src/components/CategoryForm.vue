@@ -27,7 +27,6 @@ export default {
        form: {
           name: '',
           desc: '',
-
         },
         
     }
